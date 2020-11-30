@@ -1,0 +1,11 @@
+C:\03_Coding\02 Projects\C#\DepartmentTree\DepartmentTreeData\bin\Debug\DepartmentTreeData.dll.config
+C:\03_Coding\02 Projects\C#\DepartmentTree\DepartmentTreeData\bin\Debug\DepartmentTreeData.dll
+C:\03_Coding\02 Projects\C#\DepartmentTree\DepartmentTreeData\bin\Debug\DepartmentTreeData.pdb
+C:\03_Coding\02 Projects\C#\DepartmentTree\DepartmentTreeData\bin\Debug\EntityFramework.dll
+C:\03_Coding\02 Projects\C#\DepartmentTree\DepartmentTreeData\bin\Debug\EntityFramework.SqlServer.dll
+C:\03_Coding\02 Projects\C#\DepartmentTree\DepartmentTreeData\bin\Debug\EntityFramework.xml
+C:\03_Coding\02 Projects\C#\DepartmentTree\DepartmentTreeData\bin\Debug\EntityFramework.SqlServer.xml
+C:\03_Coding\02 Projects\C#\DepartmentTree\DepartmentTreeData\obj\Debug\DepartmentTreeData.csproj.CoreCompileInputs.cache
+C:\03_Coding\02 Projects\C#\DepartmentTree\DepartmentTreeData\obj\Debug\DepartmentTreeData.csproj.CopyComplete
+C:\03_Coding\02 Projects\C#\DepartmentTree\DepartmentTreeData\obj\Debug\DepartmentTreeData.dll
+C:\03_Coding\02 Projects\C#\DepartmentTree\DepartmentTreeData\obj\Debug\DepartmentTreeData.pdb
