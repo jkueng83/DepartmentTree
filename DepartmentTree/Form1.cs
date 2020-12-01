@@ -22,31 +22,38 @@ namespace DepartmentTree
             InitializeComponent();
 
             _departmentTreeLogic = new DepartmentTreeLogic.DepartmentTreeLogic();
-            LoadDepartments();
-            LoadParantDepartments();
+            UpdateWindow();
         }
 
         private void btAdd_Click(object sender, EventArgs e)
         {
-            Departments2 department = new Departments2();
-            department.Name = tbDepartment.Text;
+            Departments2 AddDepartment = new Departments2();
+            AddDepartment.Name = tbDepartment.Text;
             Departments2 parentDepartment = _departments.FirstOrDefault(x => x.Name == cBoxParent.Text); //  Where(x => x.Name == "verkauf").Select(x => x)
             /// hier weiter
             if (parentDepartment.Id > 0)
             {
-                department.Parent_Id = parentDepartment.Id  ;
+                AddDepartment.Parent_Id = parentDepartment.Id  ;
             }
             else
             {
-                department.Parent_Id = null;
+                AddDepartment.Parent_Id = null;
             }
             
 
-            _departmentTreeLogic.AddDepartment(department);
+            _departmentTreeLogic.AddDepartment(AddDepartment);
 
             var d = _departmentTreeLogic.Departments();
 
+            UpdateWindow();
 
+        }
+
+        private void UpdateWindow()
+        {
+            LoadDepartments();
+            LoadParantDepartments();
+            LoadDepertmentTreeView();
         }
 
         private void LoadDepartments()
@@ -56,9 +63,41 @@ namespace DepartmentTree
 
         private void LoadParantDepartments()
         {
-            cBoxParent.Items.AddRange(_departments.Select(a => a.Name.ToString()).ToArray());
-            
-           
+            cBoxParent.Items.Clear();
+            cBoxParent.Items.AddRange(_departments.OrderBy(x => x.Name).Select(a => a.Name.ToString()).ToArray());
         }
+
+        private void LoadDepertmentTreeView()
+        {
+            List<Departments2> departmens = _departments.OrderBy(x => x.Name).ToList();
+            tViewDepartments.Nodes.Clear();
+            tViewDepartments.BeginUpdate();
+
+            var departmentsWithoutParent = _departments.Select(x => x).Where(x => x.Parent_Id == 0 || x.Parent_Id == null).OrderBy(x => x.Name);
+
+            
+
+            foreach (var department in departmentsWithoutParent)
+            {
+                TreeNode node = new TreeNode(department.Name);
+                tViewDepartments.Nodes.Add(node);
+                AddChildDepartment(department.Id, ref node);
+            }
+            tViewDepartments.EndUpdate();
+        }
+
+        private void AddChildDepartment(int parentId , ref TreeNode treeNode)
+        {
+            var selectedDepartments = _departments.Select(x => x).Where(x => x.Parent_Id == parentId).OrderBy(x => x.Name);
+
+            foreach (var department in selectedDepartments)
+            {
+                TreeNode node = new TreeNode(department.Name);
+                treeNode.Nodes.Add(node);
+                AddChildDepartment(department.Id, ref node);
+
+            }
+        }
+
     }
 }
