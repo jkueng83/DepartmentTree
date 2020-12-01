@@ -28,11 +28,7 @@ namespace DepartmentTreeLogic
 
             departments = _departmentTreeEntities.Departments2.Select(d => d).ToList();
 
-
             return departments;
         }
-
-
-
     }
 }

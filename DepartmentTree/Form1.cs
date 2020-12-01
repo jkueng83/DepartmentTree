@@ -29,8 +29,9 @@ namespace DepartmentTree
         {
             Departments2 AddDepartment = new Departments2();
             AddDepartment.Name = tbDepartment.Text;
+
             Departments2 parentDepartment = _departments.FirstOrDefault(x => x.Name == cBoxParent.Text); //  Where(x => x.Name == "verkauf").Select(x => x)
-            /// hier weiter
+            
             if (parentDepartment.Id > 0)
             {
                 AddDepartment.Parent_Id = parentDepartment.Id  ;
@@ -38,15 +39,11 @@ namespace DepartmentTree
             else
             {
                 AddDepartment.Parent_Id = null;
-            }
-            
+            }          
 
             _departmentTreeLogic.AddDepartment(AddDepartment);
 
-            var d = _departmentTreeLogic.Departments();
-
             UpdateWindow();
-
         }
 
         private void UpdateWindow()
@@ -69,20 +66,18 @@ namespace DepartmentTree
 
         private void LoadDepertmentTreeView()
         {
-            List<Departments2> departmens = _departments.OrderBy(x => x.Name).ToList();
             tViewDepartments.Nodes.Clear();
             tViewDepartments.BeginUpdate();
 
             var departmentsWithoutParent = _departments.Select(x => x).Where(x => x.Parent_Id == 0 || x.Parent_Id == null).OrderBy(x => x.Name);
-
             
-
             foreach (var department in departmentsWithoutParent)
             {
                 TreeNode node = new TreeNode(department.Name);
                 tViewDepartments.Nodes.Add(node);
                 AddChildDepartment(department.Id, ref node);
             }
+
             tViewDepartments.EndUpdate();
         }
 
@@ -95,9 +90,7 @@ namespace DepartmentTree
                 TreeNode node = new TreeNode(department.Name);
                 treeNode.Nodes.Add(node);
                 AddChildDepartment(department.Id, ref node);
-
             }
         }
-
     }
 }
